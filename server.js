@@ -7,6 +7,8 @@ var express = require('express');
 var router = express();
 var server = http.createServer(router);
 
+var url;
+
 router.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -14,9 +16,9 @@ router.use(function(req, res, next) {
 });
 
 
-router.use('/', function(req, res) {
-  var url = 'http://www.band.uol.com.br/rss/colunista_266.xml';
-  req.pipe(request(url)).pipe(res);  
+router.get('/', function(req, res) {
+  var url = req.query.url ||'http://www.band.uol.com.br/rss/colunista_266.xml';
+  req.pipe(request(url)).pipe(res);
 });
 
 
