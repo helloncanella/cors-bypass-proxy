@@ -22,9 +22,12 @@ router.get('/', function(req, res) {
   
   // req('http://www.band.uol.com.br/rss/colunista_266.xml')
   
-  request('http://www.band.uol.com.br/rss/colunista_266.xml', function (error, response, body) {
+  request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      body = body.replace(/ISO-8859-1/,'UTF-8')
+      console.log(JSON.stringify(body))
+      
+      body = JSON.stringify(body);
+   
       return unescape(encodeURIComponent(body)) // Show the HTML for the Google homepage. 
     }
   }).pipe(res)
